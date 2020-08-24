@@ -9,6 +9,7 @@ type GameDeckType = {
   name: string;
   description: string;
   dateString: string;
+  category: number;
   geo: string;
   pairs: [[PairType, PairType]];
 };
