@@ -61,7 +61,6 @@ export const DeckSelector = ({ select }: Props) => {
               setSelectedCategory(Number(ev.target.value))
             }
           >
-            <option value="0">All Categories</option>
             {CategoryList.filter((d: CategoryType) =>
               deckCategories.includes(d.number)
             ).map((category: CategoryType, i: number) => (

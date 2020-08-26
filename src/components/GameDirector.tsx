@@ -4,12 +4,19 @@ import { DeckSelector } from "./DeckSelector";
 import { GameOptions } from "./GameOptions";
 import { SoloGame } from "./SoloGame";
 import { ResultsSolo } from "./ResultsSolo";
+import { MultiWaitingRoom } from "./MultiWaitingRoom";
 
 enum GAME_STAGES {
   DECK_SELECT,
   GAME_OPTIONS,
   SOLO_GAME,
+  MULTI_GAME_SETUP,
   GAME_FINISHED,
+}
+
+export enum GAME_MODES {
+  SOLO_PAIRS,
+  MULTI_PAIRS,
 }
 
 //Manages the game's flow
@@ -28,13 +35,19 @@ export const GameDirector = () => {
 
   function deckDetails(gameDeck: GameDeckType) {
     setGameDeck(gameDeck);
-    setGameStage(GAME_STAGES.SOLO_GAME);
+    if (gameDeck.gameMode === GAME_MODES.SOLO_PAIRS) {
+      setGameStage(GAME_STAGES.SOLO_GAME);
+    } else if (gameDeck.gameMode === GAME_MODES.MULTI_PAIRS) {
+      setGameStage(GAME_STAGES.MULTI_GAME_SETUP);
+    }
   }
 
   function gameFinished(playerScore: number) {
     setPlayerScore(playerScore);
     setGameStage(GAME_STAGES.GAME_FINISHED);
   }
+
+  function multiGameFinished() {}
 
   function newGame(replay: boolean) {
     replay
@@ -57,6 +70,14 @@ export const GameDirector = () => {
             playerScore={playerScore}
             gameDeck={gameDeck}
             gameDirectorCB={newGame}
+          />
+        );
+    case GAME_STAGES.MULTI_GAME_SETUP:
+      if (gameDeck)
+        return (
+          <MultiWaitingRoom
+            deck={gameDeck}
+            gameDirectorCB={multiGameFinished}
           />
         );
     default:

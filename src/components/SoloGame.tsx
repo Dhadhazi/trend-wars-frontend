@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { GameButton, BUTTON_STATES } from "./GameButton";
-import { ProgressBar } from "./ProgressBar";
+import { CountdownTimer } from "./CountdownTimer";
 
 type Props = {
   deck: GameDeckType;
   gameDirectorCB: Function;
 };
 
+//Setting playerscore counter here, so it won't rerender
+let playerScore = 0;
+
 export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
   const [gameState, setGameState] = useState<number>(-1);
-
-  const [playerScore, setPlayerScore] = useState<number>(0);
 
   const [buttonState, setButtonState] = useState<BUTTON_STATES>(
     BUTTON_STATES.CHOOSE
@@ -27,9 +28,16 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
   }
 
   function playerChoice(choice: PairType) {
-    if (choice.winner) setPlayerScore((prevScore) => prevScore + 1);
+    if (choice.winner) {
+      playerScore++;
+    }
     setButtonState(BUTTON_STATES.RESULT);
-    setTimeout(() => gameMaster(), 1000);
+    setTimeout(() => gameMaster(), 1500);
+  }
+
+  function timerDone() {
+    setButtonState(BUTTON_STATES.RESULT);
+    setTimeout(() => gameMaster(), 1500);
   }
 
   useEffect(() => {
@@ -44,7 +52,7 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
   return (
     <div className="container  text-center">
       <div className="row  gamebox">
-        <div className="col-12 text-left">
+        <div className="col-6 text-left">
           <small>
             Total questions: {gameState + 1}/{numberOfQuestions}
             <br />
@@ -52,6 +60,16 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
             <br />
             {deck.dateString}
           </small>
+        </div>
+        <div className="col-6">
+          <div className="d-flex justify-content-end">
+            <CountdownTimer
+              seconds={deck.timer}
+              trigger={gameState}
+              playing={buttonState === BUTTON_STATES.CHOOSE ? true : false}
+              completeCB={timerDone}
+            />
+          </div>
         </div>
         <div className="col-md-6 choosebox">
           <GameButton
@@ -68,11 +86,6 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
           />
         </div>
 
-        <div className="col-2"></div>
-        <div className="col-8 margin-top">
-          <ProgressBar />
-        </div>
-        <div className="col-2"></div>
         <div className="col-12 text-center margin-top">
           Your score: {playerScore}
           <br />

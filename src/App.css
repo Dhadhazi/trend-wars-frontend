@@ -45,3 +45,14 @@
 #game-button-div {
   height: 100%;
 }
+
+.timer-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

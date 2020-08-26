@@ -12,4 +12,6 @@ type GameDeckType = {
   category: number;
   geo: string;
   pairs: [[PairType, PairType]];
+  timer: number;
+  gameMode: enum;
 };
