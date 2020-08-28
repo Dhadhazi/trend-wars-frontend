@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { gql, useSubscription, useMutation } from "@apollo/client";
 import { GameButton, BUTTON_STATES } from "./GameButton";
 import { CountdownTimer } from "./CountdownTimer";
@@ -14,6 +14,12 @@ type Props = {
 const CHANGE_GAMESTATE = gql`
   mutation changeGameRoomState($gameId: String, $state: Int) {
     changeGameRoomState(gameId: $gameId, state: $state)
+  }
+`;
+
+const EXIT_GAME = gql`
+  mutation exitGameRoom($gameId: String, $nick: String) {
+    exitGameRoom(gameId: $gameId, nick: $nick)
   }
 `;
 
@@ -51,17 +57,21 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     errorPolicy: "all",
   });
 
+  const [exitGameMutation] = useMutation(EXIT_GAME, {
+    onError: (error: any) => console.log("error", error?.networkError?.result),
+    errorPolicy: "all",
+  });
+
   const numberOfQuestions = gameRoom.gameDeck.pairs.length;
 
   useSubscription(GAMEROOM_SUB, {
     variables: { gameId: gameRoom.gameId },
     onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData.data.GameRoom);
       if (
         subscriptionData.data.GameRoom.answers ===
         subscriptionData.data.GameRoom.players.length
       ) {
-        setTimeout(() => nextState(), 1500);
+        if (gameRoom.creator === nick) setTimeout(() => nextState(), 1500);
       }
       if (gameState + 1 === subscriptionData.data.GameRoom.state) {
         setAnswered(false);
@@ -72,8 +82,30 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     },
   });
 
-  /*Increase gameState by one, if it's equal to pairs.length show results screen*/
-  async function nextState() {
+  //If somebody quits it kicks him out of the game
+  useEffect(() => {
+    const cleanup = () => {
+      exitGameMutation({
+        variables: {
+          gameId: gameRoom.gameId,
+          nick,
+        },
+      });
+    };
+    window.addEventListener("beforeunload", cleanup);
+
+    window.onbeforeunload = closingCode;
+    function closingCode() {
+      cleanup();
+      return null;
+    }
+    return () => {
+      window.removeEventListener("beforeunload", cleanup);
+    };
+  }, []);
+
+  //TODO: Investigate why is it called twice
+  function nextState() {
     changeGameStateMutation({
       variables: {
         gameId: gameRoom.gameId,
@@ -94,7 +126,6 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   }
 
   function timerDone() {
-    console.log("timeout");
     addPlayerAnswerMutation({
       variables: {
         gameId: gameRoom.gameId,
@@ -116,7 +147,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     );
   }
 
-  if (gameState + 1 === gameRoom.gameDeck.pairs.length) {
+  if (gameState === gameRoom.gameDeck.pairs.length) {
     gameRoom.players = players;
     return (
       <MultiGameResult
@@ -147,6 +178,9 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
               completeCB={timerDone}
             />
           </div>
+        </div>
+        <div className="col-12">
+          {answered ? "Waiting for others to answer" : ""}
         </div>
         <div className="col-md-6 choosebox">
           <GameButton
