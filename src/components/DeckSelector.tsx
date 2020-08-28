@@ -16,7 +16,7 @@ const GET_DECKS = gql`
 `;
 
 type Props = {
-  select: Function;
+  gameDirectorCB: Function;
 };
 
 type CategoryType = {
@@ -29,18 +29,14 @@ type CountryType = {
   name: string;
 };
 
-export const DeckSelector = ({ select }: Props) => {
+export const DeckSelector = ({ gameDirectorCB }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
 
   const { loading, error, data } = useQuery(GET_DECKS);
 
   if (loading) {
-    return (
-      <progress className="progress is-large is-info" max="100">
-        60%
-      </progress>
-    );
+    return <div className="container">Loading Data...</div>;
   }
   if (error) {
     return <div>Error, can't get the decks</div>;
@@ -129,7 +125,7 @@ export const DeckSelector = ({ select }: Props) => {
                         </p>
                         <button
                           className="btn btn-lg btn-block btn-dark"
-                          onClick={() => select(deck._id)}
+                          onClick={() => gameDirectorCB(deck._id)}
                         >
                           Select Deck
                         </button>

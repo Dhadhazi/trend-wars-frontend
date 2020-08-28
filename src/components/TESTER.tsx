@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useSpring, animated } from "react-spring";
 
 export const TESTER = () => {

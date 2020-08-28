@@ -4,9 +4,8 @@ import "./App.css";
 import { DeckAdmin } from "./Admin/DeckAdmin";
 import { CreateDeck } from "./Admin/CreateDeck";
 import { Navigation } from "./components/Navigation";
-import { GameDirector } from "./components/GameDirector";
+import { GameDirector, GAME_STAGES } from "./components/GameDirector";
 import { TESTER } from "./components/TESTER";
-import { JoinGame } from "./components/JoinGame";
 
 function App() {
   return (
@@ -14,8 +13,16 @@ function App() {
       <Navigation />
       <Route path="/deckadmin" component={DeckAdmin} />
       <Route path="/createdeck" component={CreateDeck} />
-      <Route path="/newgame" component={GameDirector} />
-      <Route path="/join" component={JoinGame} />
+      <Route
+        path="/newgame"
+        render={() => <GameDirector initialState={GAME_STAGES.DECK_SELECT} />}
+      />
+      <Route
+        path="/join"
+        render={() => (
+          <GameDirector initialState={GAME_STAGES.MULTI_JOIN_GAME} />
+        )}
+      />
       <TESTER />
     </div>
   );

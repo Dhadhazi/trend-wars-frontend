@@ -19,7 +19,7 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
   const numberOfQuestions = deck.pairs.length;
 
   function gameMaster() {
-    if (gameState === deck.pairs.length - 1) {
+    if (gameState === numberOfQuestions - 1) {
       gameDirectorCB(playerScore);
     } else {
       setGameState((prevState) => prevState + 1);

@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 
 const JOIN_GAME = gql`
@@ -6,17 +6,43 @@ const JOIN_GAME = gql`
     joinGameRoom(gameId: $gameId, nick: $nick) {
       gameDeck {
         name
+        description
+        dateString
+        geo
+        timer
+        pairs {
+          word
+          score
+          winner
+        }
       }
+      players {
+        nick
+        points
+      }
+      gameId
+      answers
+      state
     }
   }
 `;
 
-export const JoinGame = () => {
+type Props = {
+  gameDirectorCB: Function;
+};
+
+export const JoinGame = ({ gameDirectorCB }: Props) => {
   const [gameId, setGameId] = useState<string>("");
   const [nick, setNick] = useState<string>("");
 
   const [joinGameMutation] = useMutation(JOIN_GAME, {
-    onCompleted: (res) => console.log("Joined, yeey!"),
+    onCompleted: (res) => {
+      if (res.joinGameRoom === null) {
+        console.log("no such room");
+      } else {
+        gameDirectorCB(res.joinGameRoom, nick);
+      }
+    },
     onError: (error: any) => console.log("error", error?.networkError?.result),
     errorPolicy: "all",
   });
@@ -26,8 +52,9 @@ export const JoinGame = () => {
     setGameId(value);
   }
 
-  function joinGame() {
-    joinGameMutation({
+  async function joinGame() {
+    //TODO Check if name already exists
+    await joinGameMutation({
       variables: {
         gameId: gameId,
         nick: nick,

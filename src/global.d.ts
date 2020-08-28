@@ -4,6 +4,20 @@ type PairType = {
   winner: boolean;
 };
 
+type MultiPlayer = {
+  nick: string;
+  points: number;
+};
+
+type GameRoomType = {
+  gameId: string;
+  creator: string;
+  state: number;
+  answers: number;
+  players: [MultiPlayer];
+  gameDeck: GameDeckType;
+};
+
 type GameDeckType = {
   _id: string;
   name: string;
