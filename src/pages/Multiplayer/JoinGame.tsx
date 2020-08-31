@@ -27,6 +27,12 @@ const JOIN_GAME = gql`
   }
 `;
 
+const NICK_EXISTS = gql`
+  mutation nickExistsCheck($gameId: String!, $nick: String!) {
+    nickExistsCheck(gameId: $gameId, nick: $nick)
+  }
+`;
+
 type Props = {
   gameDirectorCB: Function;
 };
@@ -34,6 +40,25 @@ type Props = {
 export const JoinGame = ({ gameDirectorCB }: Props) => {
   const [gameId, setGameId] = useState<string>("");
   const [nick, setNick] = useState<string>("");
+
+  const [nickExistsMutation] = useMutation(NICK_EXISTS, {
+    onCompleted: (res) => {
+      if (res.nickExistsCheck === null) {
+        console.log("Room does not exists");
+      } else if (res.nickExistsCheck) {
+        console.log("Nick already taken");
+      } else {
+        joinGameMutation({
+          variables: {
+            gameId: gameId,
+            nick: nick,
+          },
+        });
+      }
+    },
+    onError: (error: any) => console.log("error", error?.networkError?.result),
+    errorPolicy: "all",
+  });
 
   const [joinGameMutation] = useMutation(JOIN_GAME, {
     onCompleted: (res) => {
@@ -52,9 +77,8 @@ export const JoinGame = ({ gameDirectorCB }: Props) => {
     setGameId(value);
   }
 
-  async function joinGame() {
-    //TODO Check if name already exists
-    await joinGameMutation({
+  function joinGame() {
+    nickExistsMutation({
       variables: {
         gameId: gameId,
         nick: nick,

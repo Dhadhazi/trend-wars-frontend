@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { countryStringMaker } from "../../constants/CountryCodes";
 import { GAME_MODES } from "../../components/GameDirector";
@@ -71,8 +71,6 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
     }
     return questions;
   }
-  //TODO: IF nick empty do not accept form!
-
   const [createGameRoomMutation] = useMutation(CREATE_GAMEROOM, {
     onCompleted: (res) => {
       return res.addGameRoom;
@@ -230,6 +228,7 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
             <button
               className="btn btn-lg btn-secondary margin-top"
               onClick={() => startGame()}
+              disabled={nick.length === 0 ? true : false}
             >
               Start Game
             </button>

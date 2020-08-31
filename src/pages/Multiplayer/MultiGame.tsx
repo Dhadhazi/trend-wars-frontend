@@ -73,6 +73,9 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
       ) {
         if (gameRoom.creator === nick) setTimeout(() => nextState(), 1500);
       }
+      if (subscriptionData.data.GameRoom.state === -2) {
+        setGameState(subscriptionData.data.GameRoom.state);
+      }
       if (gameState + 1 === subscriptionData.data.GameRoom.state) {
         setAnswered(false);
         setGameState(subscriptionData.data.GameRoom.state);
@@ -106,6 +109,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
 
   //TODO: Investigate why is it called twice
   function nextState() {
+    console.log("next state called");
     changeGameStateMutation({
       variables: {
         gameId: gameRoom.gameId,
@@ -144,6 +148,15 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
         creator={nick === gameRoom.creator}
         gameDirectorCB={nextState}
       />
+    );
+  }
+
+  if (gameState === -2) {
+    return (
+      <div className="container">
+        {" "}
+        The game has been cancelled by the creator.
+      </div>
     );
   }
 

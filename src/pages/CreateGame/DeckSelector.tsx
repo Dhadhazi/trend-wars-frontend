@@ -66,6 +66,7 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
               .map((deck: GameDeckType, i: number) => {
                 return (
                   <DeckSelectorCard
+                    key={`ds-${i}`}
                     index={i}
                     name={deck.name}
                     description={deck.description}

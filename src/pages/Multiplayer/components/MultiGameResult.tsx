@@ -22,7 +22,7 @@ export const MultiGameResult = ({ gameRoom, nick, gameDirectorCB }: Props) => {
             .sort((a, b) => b.points - a.points)
             .map((player: MultiPlayer, i: number) => (
               <tr key={`ranking-${i}`}>
-                <th scope="row">{i}</th>
+                <th scope="row">{i + 1}</th>
                 <td>{player.nick}</td>
                 <td>{player.points}</td>
               </tr>
