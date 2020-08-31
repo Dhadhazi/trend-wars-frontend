@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { CountryCodes } from "./CountryCodes";
-import { CategoryList } from "./CategoryList";
+import { CountryCodes } from "../../constants/CountryCodes";
+import { CategoryList } from "../../constants/CategoryList";
 
 const CREATE_DECK = gql`
   mutation addDeck(

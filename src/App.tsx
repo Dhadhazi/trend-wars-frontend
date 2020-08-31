@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import "./App.css";
-import { DeckAdmin } from "./Admin/DeckAdmin";
-import { CreateDeck } from "./Admin/CreateDeck";
+import { DeckAdmin } from "./pages/Admin/DeckAdmin";
+import { CreateDeck } from "./pages/Admin/CreateDeck";
 import { Navigation } from "./components/Navigation";
 import { GameDirector, GAME_STAGES } from "./components/GameDirector";
 import { TESTER } from "./components/TESTER";

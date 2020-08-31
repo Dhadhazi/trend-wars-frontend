@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { GameButton, BUTTON_STATES } from "./GameButton";
-import { CountdownTimer } from "./CountdownTimer";
+import { GameButton, BUTTON_STATES } from "../../components/GameButton";
+import { CountdownTimer } from "../../components/CountdownTimer";
 
 type Props = {
   deck: GameDeckType;
@@ -21,6 +21,7 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
   function gameMaster() {
     if (gameState === numberOfQuestions - 1) {
       gameDirectorCB(playerScore);
+      playerScore = 0;
     } else {
       setGameState((prevState) => prevState + 1);
       setButtonState(BUTTON_STATES.CHOOSE);
@@ -71,14 +72,14 @@ export const SoloGame = ({ deck, gameDirectorCB }: Props) => {
             />
           </div>
         </div>
-        <div className="col-md-6 choosebox">
+        <div className="col-6 choosebox">
           <GameButton
             pair={deck.pairs[gameState][0]}
             onclick={playerChoice}
             state={buttonState}
           />
         </div>
-        <div className="col-md-6 choosebox">
+        <div className="col-6 choosebox">
           <GameButton
             pair={deck.pairs[gameState][1]}
             onclick={playerChoice}

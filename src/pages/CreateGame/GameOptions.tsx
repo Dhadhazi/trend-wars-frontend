@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { countryStringMaker } from "../Admin/CountryCodes";
-import { GAME_MODES } from "./GameDirector";
+import { countryStringMaker } from "../../constants/CountryCodes";
+import { GAME_MODES } from "../../components/GameDirector";
 import moment from "moment";
 
 const GET_DECK = gql`

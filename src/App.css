@@ -1,9 +1,24 @@
-@keyframes buttonGrow {
-  from {
-    transform: height(0);
+@keyframes winner {
+  0% {
+    transform: scale(1);
   }
-  to {
-    transform: rotateZ(10deg);
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes looser {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
@@ -32,6 +47,17 @@
 
 .btn-game {
   border: 0;
+  height: 5rem;
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 440px) {
+  .btn-game {
+    font-size: 1rem;
+  }
 }
 
 .btn-game:hover {
@@ -40,6 +66,14 @@
 
 .btn-game:active:hover {
   transform: scale(0.96);
+}
+
+.btn-game-winner {
+  animation: winner 1.2s;
+}
+
+.btn-game-looser {
+  animation: looser 1.2s;
 }
 
 #game-button-div {

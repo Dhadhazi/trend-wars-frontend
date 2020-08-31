@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { gql, useSubscription, useMutation } from "@apollo/client";
-import { GameButton, BUTTON_STATES } from "./GameButton";
-import { CountdownTimer } from "./CountdownTimer";
-import { MultiWaitingRoom } from "./MultiWaitingRoom";
-import { MultiGameResult } from "./MultiGameResult";
+import { GameButton, BUTTON_STATES } from "../../components/GameButton";
+import { CountdownTimer } from "../../components/CountdownTimer";
+import { MultiWaitingRoom } from "./components/MultiWaitingRoom";
+import { MultiGameResult } from "./components/MultiGameResult";
 
 type Props = {
   gameRoom: GameRoomType;
@@ -102,7 +102,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     return () => {
       window.removeEventListener("beforeunload", cleanup);
     };
-  }, []);
+  }, [exitGameMutation, gameRoom.gameId, nick]);
 
   //TODO: Investigate why is it called twice
   function nextState() {

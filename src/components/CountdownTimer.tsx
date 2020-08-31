@@ -23,7 +23,7 @@ export const CountdownTimer = ({
   };
 
   return (
-    <div className="timer-wrapper">
+    <div className="timer-wrapper margin-top">
       <CountdownCircleTimer
         isPlaying={playing}
         key={trigger}

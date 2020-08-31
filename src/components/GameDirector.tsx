@@ -1,11 +1,11 @@
 /* eslint-disable no-fallthrough */
 import React, { useState } from "react";
-import { DeckSelector } from "./DeckSelector";
-import { GameOptions } from "./GameOptions";
-import { SoloGame } from "./SoloGame";
-import { ResultsSolo } from "./ResultsSolo";
-import { JoinGame } from "./JoinGame";
-import { MultiGame } from "./MultiGame";
+import { DeckSelector } from "../pages/CreateGame/DeckSelector";
+import { GameOptions } from "../pages/CreateGame/GameOptions";
+import { SoloGame } from "../pages/Solo/SoloGame";
+import { ResultsSolo } from "../pages/Solo/ResultsSolo";
+import { JoinGame } from "../pages/Multiplayer/JoinGame";
+import { MultiGame } from "../pages/Multiplayer/MultiGame";
 
 export enum GAME_STAGES {
   DECK_SELECT,
