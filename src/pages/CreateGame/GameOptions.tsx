@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { countryStringMaker } from "../../constants/CountryCodes";
 import { GAME_MODES } from "../../components/GameDirector";
 import moment from "moment";
+import { BButton } from "../../components/BButton";
+import { TrendWarsLogo } from "../../components/TrendWarsLogo";
+import "./GameOptions.css";
+import { NormalButton } from "../../components/NormalButton";
 
 const GET_DECK = gql`
   query deckById($id: ID!) {
@@ -143,97 +147,86 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
       pairs,
     } = data.deckById;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-2"></div>
-          <div className="col-8 text-center">
-            <h2>{name}</h2>
-            <h5>{description}</h5>
-            <h6> There are {pairs.length} questions in this deck.</h6>
-            <h6>
-              Date Range: {start_date} until {end_date}
-            </h6>
-            <h6>Countries: {countryStringMaker(geo)}</h6>
-            <h2>Options</h2>
-
-            <div className="form-group">
-              <label htmlFor="formControlRange" className="h3">
-                Number of questions in the game: {numberOfQuestions}
-              </label>
-              <input
-                type="range"
-                className="form-control-range"
-                id="formControlRange"
-                max={pairs.length}
-                min={3}
-                value={numberOfQuestions}
-                onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
-              />
-              <br />
-              <label htmlFor="formControlRange" className="h3">
-                How many seconds to answer a question: {seconds}
-              </label>
-              <input
-                type="range"
-                className="form-control-range"
-                id="formControlRange"
-                max={10}
-                min={2}
-                value={seconds}
-                onChange={(e) => setSeconds(Number(e.target.value))}
-              />
-            </div>
-            <div className="form-check form-check-inline margin-top">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="solo"
-                value="solo"
-                defaultChecked
-                onClick={() => setGameMode(GAME_MODES.SOLO_PAIRS)}
-              />
-              <label className="form-check-label" htmlFor="solo">
-                Solo Game
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="inlineRadioOptions"
-                id="multi"
-                value="multi"
-                onClick={() => setGameMode(GAME_MODES.MULTI_PAIRS)}
-              />
-              <label className="form-check-label" htmlFor="multi">
-                Multiplayer Game
-              </label>
-            </div>
-            {gameMode === GAME_MODES.MULTI_PAIRS ? (
-              <div>
-                Choose your nickname:{" "}
-                <input
-                  className="form-control form-control-lg margin-top"
-                  type="text"
-                  placeholder="Your nickname"
-                  onChange={(e) => setNick(e.target.value)}
-                  value={nick}
-                />
-              </div>
-            ) : (
-              ""
-            )}
-
-            <button
-              className="btn btn-lg btn-secondary margin-top"
-              onClick={() => startGame()}
-              disabled={nick.length === 0 ? true : false}
-            >
-              Start Game
-            </button>
+      <div className="flexbox-parent-middle-top flex-direction-column">
+        <TrendWarsLogo />
+        <div className="">
+          <h2>{name}</h2>
+          <div id="deck-select-info">
+            <div>{description}</div>
+            There are {pairs.length} questions in this deck.
+            <br />
+            Date Range: {start_date} until {end_date}
+            <br />
+            Countries: {countryStringMaker(geo)}
           </div>
-          <div className="col-2"></div>
+
+          <div id="slider-div">
+            <label htmlFor="formControlRange" className="slider-label">
+              Number of questions in the game: <h5>{numberOfQuestions}</h5>
+            </label>
+            <input
+              type="range"
+              className="deck-selector-slider"
+              id="formControlRange"
+              max={pairs.length}
+              min={3}
+              value={numberOfQuestions}
+              onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
+            />
+            <br />
+            <label htmlFor="formControlRange" className="slider-label">
+              How many seconds to answer a question: <h5> {seconds}</h5>
+            </label>
+            <input
+              type="range"
+              className="deck-selector-slider"
+              id="formControlRange"
+              max={10}
+              min={2}
+              value={seconds}
+              onChange={(e) => setSeconds(Number(e.target.value))}
+            />
+          </div>
+
+          <div id="gametype-select-box">
+            <NormalButton
+              text="Solo Game"
+              onClick={() => setGameMode(GAME_MODES.SOLO_PAIRS)}
+              selected={gameMode === GAME_MODES.SOLO_PAIRS}
+            />
+
+            <NormalButton
+              text="Multiplayer Game"
+              onClick={() => setGameMode(GAME_MODES.MULTI_PAIRS)}
+              selected={gameMode === GAME_MODES.MULTI_PAIRS}
+            />
+          </div>
+
+          {gameMode === GAME_MODES.MULTI_PAIRS ? (
+            <div id="nickname-box">
+              Choose your nickname:{" "}
+              <input
+                id="nickname-input"
+                type="text"
+                placeholder="Your nickname"
+                onChange={(e) => setNick(e.target.value)}
+                value={nick}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+          <div id="start-game-button">
+            <BButton
+              text="Start Game"
+              onClick={startGame}
+              disable={
+                nick.length === 0 && gameMode === GAME_MODES.MULTI_PAIRS
+                  ? true
+                  : false
+              }
+            />
+          </div>
         </div>
       </div>
     );

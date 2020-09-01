@@ -1,0 +1,72 @@
+.dashboard-font {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 71px;
+  text-align: center;
+  color: #3498db;
+  text-shadow: 1px 1px 2px black;
+}
+
+.bottom-center-text {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.darkened {
+  filter: brightness(60%);
+}
+
+.darkened:hover {
+  filter: brightness(100%);
+}
+
+#grid-dashboard-container {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "join creategame"
+    "createq createq";
+  grid-template-columns: 290px 290px;
+  grid-template-rows: 100px 400px 100px;
+  grid-gap: 10px;
+}
+
+#grid-dashboard-title {
+  grid-area: title;
+}
+
+#grid-dashboard-join {
+  grid-area: join;
+  background-image: url("/images/joingame.png");
+}
+
+#grid-dashboard-creategame {
+  grid-area: creategame;
+  background-image: url("/images/creategame.png");
+}
+
+#grid-dashboard-createquestions {
+  grid-area: createq;
+  background-image: url("/images/createquestions.png");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media all and (max-width: 650px) {
+  #grid-dashboard-container {
+    grid-template-areas:
+      "title"
+      "join"
+      "creategame"
+      "createq";
+    grid-template-rows: 100px 300px 300px 100px;
+    grid-template-columns: 300px;
+  }
+
+  .dashboard-font {
+    font-size: 36px;
+  }
+}

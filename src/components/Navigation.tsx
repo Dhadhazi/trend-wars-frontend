@@ -43,6 +43,9 @@ export const Navigation = () => {
             <NavLink to="/join" className="nav-link" activeClassName="active">
               Join Game
             </NavLink>
+            <NavLink to="/login" className="nav-link" activeClassName="active">
+              Login
+            </NavLink>
           </div>
         </div>
       </nav>

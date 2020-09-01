@@ -18,9 +18,8 @@ export const SelectCategories = ({
   setCategory,
 }: Props) => {
   return (
-    <div className="col-md-6">
+    <div>
       <select
-        className="form-control form-control-lg"
         name="category"
         id="category"
         value={selectedCategory}

@@ -1,0 +1,9 @@
+.join-game-box {
+  flex-direction: column;
+  font-weight: 300;
+  text-align: center;
+}
+
+#nickname {
+  width: 75%;
+}

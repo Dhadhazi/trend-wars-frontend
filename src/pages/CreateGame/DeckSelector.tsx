@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
+import "./DeckSelector.css";
 
-import { DeckSelectorCard } from "./components/DeckSelectorCard";
 import { SelectCategories } from "./components/SelectCategories";
 import { SelectCountries } from "./components/SelectCountries";
+import { DeckSelectorBox } from "./components/DeckSelectorBox";
 
 const GET_DECKS = gql`
   query getDecks {
@@ -37,8 +38,8 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
   const deckCategories = data.decks.map((d: GameDeckType) => d.category);
   const deckCountries = data.decks.map((d: GameDeckType) => d.geo).flat();
   return (
-    <div className="container margin-top">
-      <div className="row">
+    <div className="flexbox-parent-middle-top flex-direction-column">
+      <div id="deck-selection-grid">
         <SelectCategories
           deckCategories={deckCategories}
           selectedCategory={selectedCategory}
@@ -51,33 +52,27 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
           setCountry={setSelectedCountry}
         />
 
-        <div className="col-sm-1 "></div>
-        <div className="col-sm-10 margin-top ">
-          <div id="accordion">
-            {data.decks
-              .filter((d: GameDeckType) => {
-                if (selectedCategory === 0) return d;
-                return d.category === selectedCategory;
-              })
-              .filter((d: GameDeckType) => {
-                if (selectedCountry === "") return d;
-                return d.geo.includes(selectedCountry);
-              })
-              .map((deck: GameDeckType, i: number) => {
-                return (
-                  <DeckSelectorCard
-                    key={`ds-${i}`}
-                    index={i}
-                    name={deck.name}
-                    description={deck.description}
-                    id={deck._id}
-                    gameDirectorCB={gameDirectorCB}
-                  />
-                );
-              })}
-          </div>
-        </div>
-        <div className="col-sm-1"></div>
+        {data.decks
+          .filter((d: GameDeckType) => {
+            if (selectedCategory === 0) return d;
+            return d.category === selectedCategory;
+          })
+          .filter((d: GameDeckType) => {
+            if (selectedCountry === "") return d;
+            return d.geo.includes(selectedCountry);
+          })
+          .map((deck: GameDeckType, i: number) => {
+            return (
+              <DeckSelectorBox
+                key={`ds-${i}`}
+                index={i}
+                title={deck.name}
+                desc={deck.description}
+                id={deck._id}
+                gameDirectorCB={gameDirectorCB}
+              />
+            );
+          })}
       </div>
     </div>
   );

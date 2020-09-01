@@ -15,15 +15,11 @@ export const CountdownTimer = ({
   completeCB,
 }: Props) => {
   const renderTime = ({ remainingTime }: any) => {
-    return (
-      <div className="timer">
-        <div className="h1 font-weight-bold">{remainingTime}</div>
-      </div>
-    );
+    return <div id="timer-inside">{remainingTime}</div>;
   };
 
   return (
-    <div className="timer-wrapper margin-top">
+    <div id="timer-wrapper">
       <CountdownCircleTimer
         isPlaying={playing}
         key={trigger}
@@ -33,9 +29,9 @@ export const CountdownTimer = ({
         duration={seconds}
         size={100}
         colors={[
-          ["#004777", 0.33],
-          ["#F7B801", 0.33],
-          ["#A30000", 0.33],
+          ["#3498DB", 0.33],
+
+          ["#E74C3C", 0.2],
         ]}
       >
         {renderTime}
