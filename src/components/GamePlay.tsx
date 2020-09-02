@@ -10,6 +10,7 @@ type Props = {
   timerDone: Function;
   buttonState: BUTTON_STATES;
   playerChoice: Function;
+  players?: [MultiPlayer];
 };
 
 export const GamePlay = ({
@@ -18,9 +19,9 @@ export const GamePlay = ({
   timerDone,
   buttonState,
   playerChoice,
+  players,
 }: Props) => {
   const numberOfQuestions = deck.pairs.length;
-
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
       <TrendWarsLogo />
@@ -31,6 +32,7 @@ export const GamePlay = ({
           {deck.geo}
           <br />
           {deck.dateString}
+          <br />
         </div>
         <div id="clock">
           <CountdownTimer
@@ -39,6 +41,11 @@ export const GamePlay = ({
             playing={buttonState === BUTTON_STATES.CHOOSE ? true : false}
             completeCB={timerDone}
           />
+        </div>
+        <div id="waiting">
+          {players && buttonState === BUTTON_STATES.RESULT
+            ? "Waiting for other players"
+            : ""}
         </div>
         <div id="gamebuttons">
           <GameButton
@@ -55,6 +62,30 @@ export const GamePlay = ({
 
         <div id="bottomtext">
           Choose which keyword was trending more in {deck.geo} {deck.dateString}
+          {players ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {players
+                  .sort((a, b) => b.points - a.points)
+                  .map((p: MultiPlayer, i: number) => {
+                    return (
+                      <tr key={`scoreboard-${i}`}>
+                        <td>{p.nick}</td>
+                        <td>{p.points}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

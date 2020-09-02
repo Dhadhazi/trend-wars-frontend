@@ -17,6 +17,7 @@ const BigButton = styled.button`
   text-align: center;
   margin: 10px;
   :hover {
+    cursor: pointer;
     background-color: #2980b9;
     color: #2c3e50;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);

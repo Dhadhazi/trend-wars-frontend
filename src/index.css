@@ -22,7 +22,7 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 60vh;
 }
 
 .flexbox-parent-middle-top {
@@ -51,4 +51,10 @@ input[type="text"]:focus {
 #timer-wrapper {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 670px) {
+  .flexbox-parent-middle-middle {
+    height: 100vh;
+  }
 }

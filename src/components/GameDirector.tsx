@@ -70,7 +70,9 @@ export const GameDirector = ({
     setGameStage(GAME_STAGES.MULTI_GAME);
   }
 
-  function multiGameFinished() {}
+  function multiGameFinished(newgame: boolean) {
+    if (newgame) setGameStage(GAME_STAGES.DECK_SELECT);
+  }
 
   function newGame(replay: boolean) {
     replay

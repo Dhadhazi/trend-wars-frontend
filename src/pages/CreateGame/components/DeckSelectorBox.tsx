@@ -11,6 +11,7 @@ const Accordion = styled.button<{ toggle: boolean }>`
   color: ${(props) => (props.toggle ? "#ECF0F1" : "#2C3E50")};
   font-size: 24px;
   :hover {
+    cursor: pointer;
     background-color: #3498db;
     color: #ecf0f1;
   }
@@ -35,6 +36,7 @@ const Button = styled.button`
   margin-bottom: 5px;
 
   :hover {
+    cursor: pointer;
     background-color: #2980b9;
     color: #2c3e50;
   }

@@ -2,10 +2,11 @@
   display: grid;
   grid-template-areas:
     "gameinfo clock"
+    "waiting waiting"
     "buttons buttons"
     "bottomtext bottomtext";
   grid-template-columns: 350px 350px;
-  grid-template-rows: 150px 250px 100px;
+  grid-template-rows: 150px 30px 250px 100px;
 }
 
 #gameinfo {
@@ -24,6 +25,14 @@
   justify-content: flex-start;
 }
 
+#waiting {
+  grid-area: waiting;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 #gamebuttons {
   grid-area: buttons;
   display: flex;
@@ -35,8 +44,20 @@
 #bottomtext {
   grid-area: bottomtext;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+table,
+td,
+tr,
+th {
+  border-collapse: collapse;
+  border: 1px solid #3498db;
+  text-align: center;
+  width: 300px;
+  margin-top: 15px;
 }
 
 @media (max-width: 700px) {

@@ -51,6 +51,7 @@ const GButton = styled.button<{
   animation: ${(props) => scaleAnimation(props.scaleTo)} 2s linear forwards;
 
   :hover {
+    cursor: pointer;
     background-color: ${(props) =>
       props.state === BUTTON_STATES.CHOOSE ? "#2980b9" : ""};
     color: ${(props) =>
@@ -58,8 +59,7 @@ const GButton = styled.button<{
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
   }
 
-  :active,
-  :focus {
+  :active {
     outline: none;
     transform: ${(props) =>
       props.state === BUTTON_STATES.CHOOSE ? "scale(0.98)" : ""};
@@ -68,6 +68,10 @@ const GButton = styled.button<{
     color: ${(props) =>
       props.state === BUTTON_STATES.CHOOSE ? "#ecf0f1" : ""};
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  :focus {
+    outline: none;
   }
 `;
 

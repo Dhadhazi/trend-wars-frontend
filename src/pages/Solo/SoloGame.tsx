@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GameButton, BUTTON_STATES } from "../../components/GameButton";
-import { CountdownTimer } from "../../components/CountdownTimer";
+import { BUTTON_STATES } from "../../components/GameButton";
 import { GamePlay } from "../../components/GamePlay";
 
 type Props = {

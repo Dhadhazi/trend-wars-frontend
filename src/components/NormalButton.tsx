@@ -21,6 +21,7 @@ const NButton = styled.button<{ selected: boolean }>`
   text-align: center;
   margin: 10px;
   :hover {
+    cursor: pointer;
     background-color: #3498db;
     color: #ecf0f1;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
