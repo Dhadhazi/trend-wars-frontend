@@ -1,5 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { NormalButton } from "../../../components/NormalButton";
+import { BButton } from "../../../components/BButton";
 
 type LoginForm = {
   email: string;
@@ -22,69 +24,46 @@ export const LoginForm = ({ onSubmitCB, toRegistration }: Props) => {
   });
 
   return (
-    <div className="row justify-content-center">
-      <div className="row">
-        <div className="card card-signin my-5">
-          <div className="card-body">
-            <h5 className="card-title text-center">Sign In</h5>
-            <form className="form-signin" onSubmit={onSubmit}>
-              <div className="form-label-group">
-                {" "}
-                <label htmlFor="inputEmail">Email address</label>
-                <input
-                  type="email"
-                  ref={register({ required: true })}
-                  id="inputEmail"
-                  name="email"
-                  className="form-control"
-                  placeholder="Email address"
-                  required
-                  autoFocus
-                />
-              </div>
-              <div className="form-label-group">
-                {" "}
-                <label htmlFor="inputPassword">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  ref={register({ required: true })}
-                  id="inputPassword"
-                  className="form-control"
-                  placeholder="Password"
-                  required
-                />
-              </div>
-              <div className="custom-control custom-checkbox mb-3">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customCheck1"
-                  ref={register()}
-                  name="rememberme"
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember Me
-                </label>
-              </div>
-              <button
-                className="btn btn-lg btn-primary btn-block text-uppercase"
-                type="submit"
-              >
-                Sign in
-              </button>
-            </form>
-            <div className="register" onClick={() => toRegistration(true)}>
-              Not a member yer?{" "}
-              <button
-                className="btn btn-sm"
-                onClick={() => toRegistration(true)}
-              >
-                Register here!
-              </button>
-            </div>
+    <div className="flexbox-parent-middle-top flex-direction-column">
+      <div id="title">Sign In</div>
+      <div id="form">
+        <form onSubmit={onSubmit}>
+          <label htmlFor="inputEmail">Email address</label>
+          <input
+            type="email"
+            ref={register({ required: true })}
+            id="inputEmail"
+            name="email"
+            placeholder="Email address"
+            required
+            autoFocus
+          />
+          <div>
+            <label htmlFor="inputPassword">Password</label>
+            <input
+              type="password"
+              name="password"
+              ref={register({ required: true })}
+              id="inputPassword"
+              placeholder="Password"
+              required
+            />
           </div>
-        </div>
+          <div id="checkbox-div">
+            <label htmlFor="customCheck1">Remember Me</label>
+            <input
+              type="checkbox"
+              id="checkbox"
+              ref={register()}
+              name="rememberme"
+            />
+          </div>
+          <BButton text="Sign in" onClick={() => {}} />
+        </form>
+      </div>
+      <div id="register-div">
+        Not a member yer?
+        <NormalButton text="Register here!" onClick={toRegistration} />
       </div>
     </div>
   );

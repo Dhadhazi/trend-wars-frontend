@@ -1,5 +1,4 @@
 import React from "react";
-import { TrendWarsLogo } from "../../../components/TrendWarsLogo";
 import { BButton } from "../../../components/BButton";
 import "./MutliGameResult.css";
 
@@ -12,7 +11,6 @@ type Props = {
 export const MultiGameResult = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
-      <TrendWarsLogo />
       <div id="results-title">
         Congratulations, you got X right from
         {gameRoom.gameDeck.pairs.length} questions right!

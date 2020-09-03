@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Slide from "../../../animations/Slide";
 
 const Accordion = styled.button<{ toggle: boolean }>`
   margin-top: 5px;
-
   width: 350px;
+  position: relative;
+  z-index: 2;
   height: 50px;
   border: none;
   background-color: ${(props) => (props.toggle ? "#3498db" : "#2980B9")};
@@ -71,7 +73,7 @@ export const DeckSelectorBox = ({
       <Accordion toggle={isToggled} onClick={() => setIsToggled(!isToggled)}>
         {title}
       </Accordion>
-      {isToggled && (
+      <Slide isActive={isToggled}>
         <>
           <Description>{desc}</Description>{" "}
           <Button
@@ -82,7 +84,20 @@ export const DeckSelectorBox = ({
             Select Deck
           </Button>
         </>
-      )}
+      </Slide>
     </div>
   );
 };
+
+// {isToggled && (
+// <>
+//   <Description>{desc}</Description>{" "}
+//   <Button
+//     onClick={() => {
+//       gameDirectorCB(id);
+//     }}
+//   >
+//     Select Deck
+//   </Button>
+// </>
+// )}

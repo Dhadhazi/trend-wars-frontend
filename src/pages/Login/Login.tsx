@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
+import "./Login.css";
 
 import { LoginForm } from "./components/LoginForm";
 import { RegistrationForm } from "./components/RegistrationForm";
@@ -31,6 +32,14 @@ export const Login = () => {
     errorPolicy: "all",
   });
 
+  function toLogin() {
+    setRegistrationMode(false);
+  }
+
+  function toRegister() {
+    setRegistrationMode(true);
+  }
+
   function login(data: LogRegForm) {
     console.log(data);
   }
@@ -42,8 +51,8 @@ export const Login = () => {
   }
 
   return registrationMode ? (
-    <RegistrationForm onSubmitCB={register} toSignUp={setRegistrationMode} />
+    <RegistrationForm onSubmitCB={register} toSignUp={toLogin} />
   ) : (
-    <LoginForm onSubmitCB={login} toRegistration={setRegistrationMode} />
+    <LoginForm onSubmitCB={login} toRegistration={toRegister} />
   );
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import "./MultiWaitingRoom.css";
 import { BButton } from "../../../components/BButton";
-import { TrendWarsLogo } from "../../../components/TrendWarsLogo";
 
 type Props = {
   gameId: string;
@@ -18,7 +17,6 @@ export const MultiWaitingRoom = ({
 }: Props) => {
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
-      <TrendWarsLogo />
       <div id="waitingroom-roomid">The rooms ID is: {gameId} </div>
       <div id="waitingroom-playerlist-title">Players in the game: </div>
       <ul id="waitingroom-playerlist">

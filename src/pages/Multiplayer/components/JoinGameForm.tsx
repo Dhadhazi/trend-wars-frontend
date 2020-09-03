@@ -1,7 +1,6 @@
 import React from "react";
 import { BButton } from "../../../components/BButton";
 import "./JoinGameForm.css";
-import { TrendWarsLogo } from "../../../components/TrendWarsLogo";
 
 type Props = {
   joinGame: Function;
@@ -28,7 +27,6 @@ export const JoinGameForm = ({
   return (
     <div className="flexbox-parent-middle-top join-game-box">
       <div>
-        <TrendWarsLogo />
         <div>
           <label htmlFor="gamecode">Enter Game Code</label>
         </div>

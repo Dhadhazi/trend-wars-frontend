@@ -5,7 +5,7 @@ type Props = {
   text: string;
   onClick: Function;
   disable?: boolean;
-  selected: boolean;
+  selected?: boolean;
 };
 
 const NButton = styled.button<{ selected: boolean }>`

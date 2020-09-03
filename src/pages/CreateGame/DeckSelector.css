@@ -11,6 +11,7 @@ select {
 
 select:hover {
   color: #ecf0f1;
+  cursor: pointer;
 }
 
 select:focus {

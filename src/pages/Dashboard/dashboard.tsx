@@ -7,9 +7,7 @@ export const Dashboard = () => {
   return (
     <div className="flexbox-parent-middle-middle">
       <div id="grid-dashboard-container">
-        <div id="grid-dashboard-title">
-          <TrendWarsLogo />
-        </div>
+        <div id="grid-dashboard-title"></div>
         <Link
           to="/join"
           id="grid-dashboard-join"

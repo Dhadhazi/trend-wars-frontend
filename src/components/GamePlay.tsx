@@ -2,7 +2,6 @@ import React from "react";
 import { CountdownTimer } from "./CountdownTimer";
 import { GameButton, BUTTON_STATES } from "./GameButton";
 import "./GamePlay.css";
-import { TrendWarsLogo } from "./TrendWarsLogo";
 
 type Props = {
   gameState: number;
@@ -24,7 +23,6 @@ export const GamePlay = ({
   const numberOfQuestions = deck.pairs.length;
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
-      <TrendWarsLogo />
       <div id="gameplay-grid">
         <div id="gameinfo">
           Total questions: {gameState + 1}/{numberOfQuestions}
@@ -42,11 +40,13 @@ export const GamePlay = ({
             completeCB={timerDone}
           />
         </div>
+
         <div id="waiting">
           {players && buttonState === BUTTON_STATES.RESULT
             ? "Waiting for other players"
             : ""}
         </div>
+
         <div id="gamebuttons">
           <GameButton
             pair={deck.pairs[gameState][0]}

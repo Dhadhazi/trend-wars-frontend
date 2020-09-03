@@ -4,7 +4,6 @@ import { countryStringMaker } from "../../constants/CountryCodes";
 import { GAME_MODES } from "../../components/GameDirector";
 import moment from "moment";
 import { BButton } from "../../components/BButton";
-import { TrendWarsLogo } from "../../components/TrendWarsLogo";
 import "./GameOptions.css";
 import { NormalButton } from "../../components/NormalButton";
 
@@ -148,7 +147,6 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
     } = data.deckById;
     return (
       <div className="flexbox-parent-middle-top flex-direction-column">
-        <TrendWarsLogo />
         <div className="">
           <h2>{name}</h2>
           <div id="deck-select-info">
