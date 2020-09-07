@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Logo = styled.div`
   font-family: Oswald, sans-serif;
@@ -17,5 +18,9 @@ const Logo = styled.div`
 `;
 
 export const TrendWarsLogo = () => {
-  return <Logo>TrendWars</Logo>;
+  return (
+    <Link to="/">
+      <Logo>TrendWars</Logo>
+    </Link>
+  );
 };

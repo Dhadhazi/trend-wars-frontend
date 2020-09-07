@@ -40,7 +40,7 @@ type DeckForm = {
 };
 
 export const CreateDeck = () => {
-  const [submitted, setSubmitted] = useState<boolean>(true);
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const [createDeckMutation] = useMutation(CREATE_DECK, {
     onCompleted: () => {
       setSubmitted(true);

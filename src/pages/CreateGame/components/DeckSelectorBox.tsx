@@ -88,16 +88,3 @@ export const DeckSelectorBox = ({
     </div>
   );
 };
-
-// {isToggled && (
-// <>
-//   <Description>{desc}</Description>{" "}
-//   <Button
-//     onClick={() => {
-//       gameDirectorCB(id);
-//     }}
-//   >
-//     Select Deck
-//   </Button>
-// </>
-// )}

@@ -39,6 +39,7 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
 
   const deckCategories = data.decks.map((d: GameDeckType) => d.category);
   const deckCountries = data.decks.map((d: GameDeckType) => d.geo).flat();
+
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
       <div id="deck-selection-grid">
