@@ -4,6 +4,7 @@ import { BUTTON_STATES } from "../../components/GameButton";
 import { MultiWaitingRoom } from "./components/MultiWaitingRoom";
 import { MultiGameResult } from "./components/MultiGameResult";
 import { GamePlay } from "../../components/GamePlay";
+import Fade from "../../animations/Fade";
 
 type Props = {
   gameRoom: GameRoomType;
@@ -139,12 +140,14 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
 
   if (gameState === -1) {
     return (
-      <MultiWaitingRoom
-        gameId={gameRoom.gameId}
-        players={players}
-        creator={nick === gameRoom.creator}
-        gameDirectorCB={nextState}
-      />
+      <Fade>
+        <MultiWaitingRoom
+          gameId={gameRoom.gameId}
+          players={players}
+          creator={nick === gameRoom.creator}
+          gameDirectorCB={nextState}
+        />
+      </Fade>
     );
   }
 

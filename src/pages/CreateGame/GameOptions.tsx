@@ -6,6 +6,8 @@ import moment from "moment";
 import { BButton } from "../../components/BButton";
 import "./GameOptions.css";
 import { NormalButton } from "../../components/NormalButton";
+import Fade from "../../animations/Fade";
+import { Loading } from "../../components/Loading";
 
 const GET_DECK = gql`
   query deckById($id: ID!) {
@@ -128,7 +130,7 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
   }
 
   if (loading) {
-    return <div>LOADING</div>;
+    return <Loading />;
   }
 
   if (error) {
@@ -146,94 +148,90 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
       pairs,
     } = data.deckById;
     return (
-      <div className="flexbox-parent-middle-top flex-direction-column">
-        <div className="">
-          <h2>{name}</h2>
-          <div id="deck-select-info">
-            <div>{description}</div>
-            There are {pairs.length} questions in this deck.
-            <br />
-            Date Range: {start_date} until {end_date}
-            <br />
-            Countries: {countryStringMaker(geo)}
-          </div>
+      <Fade>
+        <div className="flexbox-parent-middle-top flex-direction-column">
+          <div className="">
+            <h2>{name}</h2>
+            <div id="deck-select-info">
+              <div>{description}</div>
+              There are {pairs.length} questions in this deck.
+              <br />
+              Date Range: {start_date} until {end_date}
+              <br />
+              Countries: {countryStringMaker(geo)}
+            </div>
 
-          <div id="slider-div">
-            <label htmlFor="formControlRange" className="slider-label">
-              Number of questions in the game: <h5>{numberOfQuestions}</h5>
-            </label>
-            <input
-              type="range"
-              className="deck-selector-slider"
-              id="formControlRange"
-              max={pairs.length}
-              min={3}
-              value={numberOfQuestions}
-              onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
-            />
-            <br />
-            <label htmlFor="formControlRange" className="slider-label">
-              How many seconds to answer a question: <h5> {seconds}</h5>
-            </label>
-            <input
-              type="range"
-              className="deck-selector-slider"
-              id="formControlRange"
-              max={10}
-              min={2}
-              value={seconds}
-              onChange={(e) => setSeconds(Number(e.target.value))}
-            />
-          </div>
-
-          <div id="gametype-select-box">
-            <NormalButton
-              text="Solo Game"
-              onClick={() => setGameMode(GAME_MODES.SOLO_PAIRS)}
-              selected={gameMode === GAME_MODES.SOLO_PAIRS}
-            />
-
-            <NormalButton
-              text="Multiplayer Game"
-              onClick={() => setGameMode(GAME_MODES.MULTI_PAIRS)}
-              selected={gameMode === GAME_MODES.MULTI_PAIRS}
-            />
-          </div>
-
-          {gameMode === GAME_MODES.MULTI_PAIRS ? (
-            <div id="nickname-box">
-              Choose your nickname:{" "}
+            <div id="slider-div">
+              <label htmlFor="formControlRange" className="slider-label">
+                Number of questions in the game: <h5>{numberOfQuestions}</h5>
+              </label>
               <input
-                id="nickname-input"
-                type="text"
-                placeholder="Your nickname"
-                onChange={(e) => setNick(e.target.value)}
-                value={nick}
+                type="range"
+                className="deck-selector-slider"
+                id="formControlRange"
+                max={pairs.length}
+                min={3}
+                value={numberOfQuestions}
+                onChange={(e) => setNumberOfQuestions(Number(e.target.value))}
+              />
+              <br />
+              <label htmlFor="formControlRange" className="slider-label">
+                How many seconds to answer a question: <h5> {seconds}</h5>
+              </label>
+              <input
+                type="range"
+                className="deck-selector-slider"
+                id="formControlRange"
+                max={10}
+                min={2}
+                value={seconds}
+                onChange={(e) => setSeconds(Number(e.target.value))}
               />
             </div>
-          ) : (
-            ""
-          )}
-          <div id="start-game-button">
-            <BButton
-              text="Start Game"
-              onClick={startGame}
-              disable={
-                nick.length === 0 && gameMode === GAME_MODES.MULTI_PAIRS
-                  ? true
-                  : false
-              }
-            />
+
+            <div id="gametype-select-box">
+              <NormalButton
+                text="Solo Game"
+                onClick={() => setGameMode(GAME_MODES.SOLO_PAIRS)}
+                selected={gameMode === GAME_MODES.SOLO_PAIRS}
+              />
+
+              <NormalButton
+                text="Multiplayer Game"
+                onClick={() => setGameMode(GAME_MODES.MULTI_PAIRS)}
+                selected={gameMode === GAME_MODES.MULTI_PAIRS}
+              />
+            </div>
+
+            {gameMode === GAME_MODES.MULTI_PAIRS ? (
+              <div id="nickname-box">
+                Choose your nickname:{" "}
+                <input
+                  id="nickname-input"
+                  type="text"
+                  placeholder="Your nickname"
+                  onChange={(e) => setNick(e.target.value)}
+                  value={nick}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            <div id="start-game-button">
+              <BButton
+                text="Start Game"
+                onClick={startGame}
+                disable={
+                  nick.length === 0 && gameMode === GAME_MODES.MULTI_PAIRS
+                    ? true
+                    : false
+                }
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Fade>
     );
   }
-  return (
-    <div className="container">
-      <div className="row">
-        <h1>LOADING</h1>
-      </div>
-    </div>
-  );
+  return <Loading />;
 };

@@ -6,6 +6,7 @@ import { SoloGame } from "../pages/Solo/SoloGame";
 import { ResultsSolo } from "../pages/Solo/ResultsSolo";
 import { JoinGame } from "../pages/Multiplayer/JoinGame";
 import { MultiGame } from "../pages/Multiplayer/MultiGame";
+import Fade from "../animations/Fade";
 
 export enum GAME_STAGES {
   DECK_SELECT,
@@ -82,7 +83,11 @@ export const GameDirector = ({
 
   switch (gameStage) {
     case GAME_STAGES.DECK_SELECT:
-      return <DeckSelector gameDirectorCB={deckSelected} />;
+      return (
+        <Fade>
+          <DeckSelector gameDirectorCB={deckSelected} />
+        </Fade>
+      );
     case GAME_STAGES.GAME_OPTIONS:
       return <GameOptions id={selectedDeck} gameDirectorCB={deckDetails} />;
     case GAME_STAGES.SOLO_GAME:

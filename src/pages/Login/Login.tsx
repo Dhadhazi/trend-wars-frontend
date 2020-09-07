@@ -51,7 +51,7 @@ export const Login = () => {
   }
 
   return registrationMode ? (
-    <RegistrationForm onSubmitCB={register} toSignUp={toLogin} />
+    <RegistrationForm onSubmitCB={register} toLogin={toLogin} />
   ) : (
     <LoginForm onSubmitCB={login} toRegistration={toRegister} />
   );

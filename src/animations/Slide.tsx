@@ -1,6 +1,5 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { isAbsolute } from "path";
 
 type Props = {
   children: React.ReactChild;

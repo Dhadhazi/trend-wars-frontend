@@ -49,7 +49,7 @@ type Country = {
   name: string;
 };
 
-export const CreateDeck = () => {
+export const CreateDeckadmin = () => {
   const [submitted, setSubitted] = useState<boolean>(false);
   const todayDate = new Date().toISOString().slice(0, 10);
   const { register, handleSubmit } = useForm<DeckForm>({

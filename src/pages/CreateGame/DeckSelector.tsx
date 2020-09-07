@@ -6,6 +6,8 @@ import { SelectCategories } from "./components/SelectCategories";
 import { SelectCountries } from "./components/SelectCountries";
 import { DeckSelectorBox } from "./components/DeckSelectorBox";
 
+import { Loading } from "../../components/Loading";
+
 const GET_DECKS = gql`
   query getDecks {
     decks {
@@ -29,7 +31,7 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
   const { loading, error, data } = useQuery(GET_DECKS);
 
   if (loading) {
-    return <div className="container">Loading Data...</div>;
+    return <Loading />;
   }
   if (error) {
     return <div>Error, can't get the decks</div>;
@@ -51,7 +53,6 @@ export const DeckSelector = ({ gameDirectorCB }: Props) => {
           selectedCountry={selectedCountry}
           setCountry={setSelectedCountry}
         />
-
         {data.decks
           .filter((d: GameDeckType) => {
             if (selectedCategory === 0) return d;

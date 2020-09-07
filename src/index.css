@@ -11,10 +11,10 @@ input[type="text"] {
 }
 input:focus[type="text"] {
   outline: none;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
-.body {
+body {
   background-color: #e5e5e5;
 }
 
@@ -29,11 +29,8 @@ input:focus[type="text"] {
   display: flex;
   align-items: center;
   justify-content: top;
-  height: 100vh;
-}
-
-.flex-direction-column {
   flex-direction: column;
+  height: 100vh;
 }
 
 .margin-top-20 {

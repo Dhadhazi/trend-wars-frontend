@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
 import { JoinGameForm } from "./components/JoinGameForm";
+import Fade from "../../animations/Fade";
 
 const JOIN_GAME = gql`
   mutation joinGameRoom($gameId: String!, $nick: String!) {
@@ -83,12 +84,14 @@ export const JoinGame = ({ gameDirectorCB }: Props) => {
   }
 
   return (
-    <JoinGameForm
-      joinGame={joinGame}
-      nick={nick}
-      setNick={setNick}
-      gameId={gameId}
-      setGameId={setGameId}
-    />
+    <Fade>
+      <JoinGameForm
+        joinGame={joinGame}
+        nick={nick}
+        setNick={setNick}
+        gameId={gameId}
+        setGameId={setGameId}
+      />
+    </Fade>
   );
 };

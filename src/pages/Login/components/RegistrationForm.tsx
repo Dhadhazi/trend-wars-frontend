@@ -10,10 +10,10 @@ type RegistrationForm = {
 
 type Props = {
   onSubmitCB: Function;
-  toSignUp: Function;
+  toLogin: Function;
 };
 
-export const RegistrationForm = ({ onSubmitCB, toSignUp }: Props) => {
+export const RegistrationForm = ({ onSubmitCB, toLogin }: Props) => {
   const { register, handleSubmit } = useForm<RegistrationForm>({
     mode: "onBlur",
   });
@@ -24,7 +24,7 @@ export const RegistrationForm = ({ onSubmitCB, toSignUp }: Props) => {
 
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
-      <div id="title">Sign In</div>
+      <div id="title">Registration</div>
       <div id="form">
         <form onSubmit={onSubmit}>
           <label htmlFor="inputEmail">Email address</label>
@@ -48,21 +48,11 @@ export const RegistrationForm = ({ onSubmitCB, toSignUp }: Props) => {
               required
             />
           </div>
-          <div id="checkbox-div">
-            <label htmlFor="customCheck1">Remember Me</label>
-            <input
-              type="checkbox"
-              id="checkbox"
-              ref={register()}
-              name="rememberme"
-            />
-          </div>
-          <BButton text="Sign in" onClick={() => {}} />
+          <BButton text="Register" onClick={() => {}} />
         </form>
       </div>
       <div id="register-div">
-        Not a member yer?
-        <NormalButton text="Register here!" onClick={toSignUp} />
+        <NormalButton text="Back to Login" onClick={toLogin} />
       </div>
     </div>
   );

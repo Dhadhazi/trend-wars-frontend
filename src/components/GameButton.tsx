@@ -13,15 +13,39 @@ type Props = {
   state: BUTTON_STATES;
 };
 
-const scaleAnimation = (scaleTo: number) => keyframes`
-from {
+const scaleAnimation = (scaleTo: number) => {
+  if (scaleTo !== 1) {
+    return keyframes`
+0% {
+  opacity: 1;
   transform: scale(1.0);
 }
 
-to {
-  transform: scale(${scaleTo})
+50% {
+  opacity: 1;
+}
+
+90% {
+  opacity: 0;
+  transform: scale(${scaleTo});
+
 }
 `;
+  } else {
+    return keyframes`
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    
+    to {
+      transform: scale(1.0);
+      opacity: 1;
+
+    }
+    `;
+  }
+};
 
 const GButton = styled.button<{
   state: BUTTON_STATES;
@@ -48,7 +72,9 @@ const GButton = styled.button<{
   font-size: 24px;
   text-align: center;
   margin: 10px;
-  animation: ${(props) => scaleAnimation(props.scaleTo)} 2s linear forwards;
+  animation: ${(props) => scaleAnimation(props.scaleTo)} linear forwards;
+  animation-duration: ${(props) =>
+    props.state === BUTTON_STATES.RESULT ? "2s" : "0.5s"};
 
   :hover {
     cursor: pointer;
