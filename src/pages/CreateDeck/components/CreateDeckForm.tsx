@@ -25,7 +25,11 @@ type Country = {
   name: string;
 };
 
-export const CreateDeckForm = () => {
+type Props = {
+  SubmitDeck: Function;
+};
+
+export const CreateDeckForm = ({ SubmitDeck }: Props) => {
   const [keywordInput, setKeywordInput] = useState<string>("");
   const [keywordList, setkeywordList] = useState<string[]>([]);
 
@@ -42,7 +46,7 @@ export const CreateDeckForm = () => {
       alert("Add more keywords, and I will add better alert msg");
     } else {
       data.keywords = keywordList;
-      console.log(data);
+      SubmitDeck(data);
     }
   });
 
@@ -114,6 +118,8 @@ export const CreateDeckForm = () => {
             ))}
           </select>
         </div>
+
+        {/* TODO: IF i click on enddate first then startdate can be anything because it is truthy. */}
         <div id="startdate-grid">
           <label htmlFor="start_date">Start Date</label>
           <input

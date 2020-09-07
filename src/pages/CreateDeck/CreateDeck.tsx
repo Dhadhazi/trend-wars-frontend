@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useMutation, gql } from "@apollo/client";
-import { useForm } from "react-hook-form";
 import { CreateDeckForm } from "./components/CreateDeckForm";
+import Fade from "../../animations/Fade";
+import { DeckSubmitted } from "./components/DeckSubmitted";
 
 const CREATE_DECK = gql`
-  mutation addDeck(
+  mutation userAddDeck(
     $name: String
     $description: String
     $keywords: [String]
@@ -13,7 +14,7 @@ const CREATE_DECK = gql`
     $category: Int
     $geo: [String]
   ) {
-    addDeck(
+    userAddDeck(
       deck: {
         name: $name
         description: $description
@@ -39,13 +40,37 @@ type DeckForm = {
 };
 
 export const CreateDeck = () => {
+  const [submitted, setSubmitted] = useState<boolean>(true);
   const [createDeckMutation] = useMutation(CREATE_DECK, {
     onCompleted: () => {
-      console.log("done");
+      setSubmitted(true);
     },
     onError: (error: any) => console.log("error", error?.networkError?.result),
     errorPolicy: "all",
   });
 
-  return <CreateDeckForm />;
+  function SubmitDeck(deck: DeckForm) {
+    deck.category = Number(deck.category);
+    createDeckMutation({
+      variables: {
+        name: deck.name,
+        description: deck.description,
+        keywords: deck.keywords,
+        start_date: deck.start_date,
+        end_date: deck.end_date,
+        category: deck.category,
+        geo: deck.geo,
+      },
+    });
+  }
+
+  return submitted ? (
+    <Fade>
+      <DeckSubmitted />
+    </Fade>
+  ) : (
+    <Fade>
+      <CreateDeckForm SubmitDeck={SubmitDeck} />
+    </Fade>
+  );
 };
