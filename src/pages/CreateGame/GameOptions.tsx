@@ -119,6 +119,7 @@ export const GameOptions = ({ id, gameDirectorCB }: Props) => {
         state: -1,
         gameDeck: { ...gameDeck },
         players: [{ nick, points: 0 }],
+        heads: [],
       };
       gameDirectorCB(gameRoom, nick);
     } else {

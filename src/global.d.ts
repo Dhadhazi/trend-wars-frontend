@@ -16,6 +16,7 @@ type GameRoomType = {
   answers: number;
   players: [MultiPlayer];
   gameDeck: GameDeckType;
+  heads: number[];
 };
 
 type GameDeckType = {

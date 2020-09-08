@@ -3,6 +3,8 @@ import { CountdownTimer } from "./CountdownTimer";
 import { GameButton, BUTTON_STATES } from "./GameButton";
 import "./GamePlay.css";
 import Fade from "../animations/Fade";
+import { HeadChoosingBox } from "./HeadChoosingBox";
+import { Flyinghead } from "./Flyinghead";
 
 type Props = {
   gameState: number;
@@ -11,6 +13,7 @@ type Props = {
   buttonState: BUTTON_STATES;
   playerChoice: Function;
   players?: [MultiPlayer];
+  gameId?: string;
 };
 
 export const GamePlay = ({
@@ -20,6 +23,7 @@ export const GamePlay = ({
   buttonState,
   playerChoice,
   players,
+  gameId,
 }: Props) => {
   const numberOfQuestions = deck.pairs.length;
   return (
@@ -55,7 +59,6 @@ export const GamePlay = ({
               onclick={playerChoice}
               state={buttonState}
             />
-
             <GameButton
               pair={deck.pairs[gameState][1]}
               onclick={playerChoice}
@@ -67,26 +70,29 @@ export const GamePlay = ({
             Choose which keyword was trending more in {deck.geo}{" "}
             {deck.dateString}
             {players ? (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Player</th>
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {players
-                    .sort((a, b) => b.points - a.points)
-                    .map((p: MultiPlayer, i: number) => {
-                      return (
-                        <tr key={`scoreboard-${i}`}>
-                          <td>{p.nick}</td>
-                          <td>{p.points}</td>
-                        </tr>
-                      );
-                    })}
-                </tbody>
-              </table>
+              <div id="scoreheadbox-div">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Player</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {players
+                      .sort((a, b) => b.points - a.points)
+                      .map((p: MultiPlayer, i: number) => {
+                        return (
+                          <tr key={`scoreboard-${i}`}>
+                            <td>{p.nick}</td>
+                            <td>{p.points}</td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+                <HeadChoosingBox gameId={gameId} />
+              </div>
             ) : (
               ""
             )}

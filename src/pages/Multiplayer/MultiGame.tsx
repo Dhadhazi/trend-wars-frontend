@@ -39,6 +39,7 @@ const GAMEROOM_SUB = gql`
       }
       answers
       state
+      heads
     }
   }
 `;
@@ -47,6 +48,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   const [gameState, setGameState] = useState<number>(gameRoom.state);
   const [players, setPlayers] = useState<[MultiPlayer]>(gameRoom.players);
   const [answered, setAnswered] = useState<boolean>(false);
+  const [localHead, setLocalHead] = useState<number>(1);
 
   const [changeGameStateMutation] = useMutation(CHANGE_GAMESTATE, {
     onError: (error: any) => console.log("error", error?.networkError?.result),
@@ -72,9 +74,11 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
       ) {
         if (gameRoom.creator === nick) setTimeout(() => nextState(), 1500);
       }
+
       if (subscriptionData.data.GameRoom.state === -2) {
         setGameState(subscriptionData.data.GameRoom.state);
       }
+
       if (gameState + 1 === subscriptionData.data.GameRoom.state) {
         setAnswered(false);
         setGameState(subscriptionData.data.GameRoom.state);
@@ -179,6 +183,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
       buttonState={answered ? BUTTON_STATES.RESULT : BUTTON_STATES.CHOOSE}
       playerChoice={playerChoice}
       players={players}
+      gameId={gameRoom.gameId}
     />
   );
 };
