@@ -30,9 +30,10 @@ type Country = {
 type Props = {
   deck: DeckForm;
   approveCB: Function;
+  deleteCB: Function;
 };
 
-export const DeckDisplay = ({ deck, approveCB }: Props) => {
+export const ApproveDeckDisplay = ({ deck, approveCB, deleteCB }: Props) => {
   const [keywordInput, setKeywordInput] = useState<string>("");
   const [keywordList, setkeywordList] = useState<string[]>([]);
 
@@ -77,7 +78,7 @@ export const DeckDisplay = ({ deck, approveCB }: Props) => {
     setValue("end_date", deck.end_date);
     setkeywordList(deck.keywords);
     if (deck.geo.length === 0) setAllCountries(true);
-  }, [deck]);
+  }, [deck, setValue]);
 
   return (
     <div className="flexbox-parent-middle-top flex-column">
@@ -215,12 +216,9 @@ export const DeckDisplay = ({ deck, approveCB }: Props) => {
           ))}
         </div>
         <div id="submitbutton-grid-admin">
-          {deck.approved ? (
-            ""
-          ) : (
-            <BButton text="Approve Deck" onClick={approveDeck} />
-          )}
-          <BButton text="Delete Deck" onClick={approveDeck} />
+          <BButton text="Approve Deck" onClick={approveDeck} />
+
+          <BButton text="Delete Deck" onClick={() => deleteCB(deck._id)} />
         </div>
       </div>
     </div>

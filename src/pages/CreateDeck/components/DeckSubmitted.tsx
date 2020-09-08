@@ -1,5 +1,4 @@
 import React from "react";
-import { Dashboard } from "../../Dashboard/dashboard";
 import { BButton } from "../../../components/BButton";
 import { Link } from "react-router-dom";
 
