@@ -70,7 +70,7 @@ th {
 @media (max-width: 700px) {
   #gameplay-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 150px 10vh 100px;
+    grid-template-rows: 150px 10vh 150px;
   }
 
   #gamebuttons {

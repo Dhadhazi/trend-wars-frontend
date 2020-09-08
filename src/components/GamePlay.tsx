@@ -3,8 +3,6 @@ import { CountdownTimer } from "./CountdownTimer";
 import { GameButton, BUTTON_STATES } from "./GameButton";
 import "./GamePlay.css";
 import Fade from "../animations/Fade";
-import { HeadChoosingBox } from "./HeadChoosingBox";
-import { Flyinghead } from "./Flyinghead";
 
 type Props = {
   gameState: number;
@@ -91,7 +89,7 @@ export const GamePlay = ({
                       })}
                   </tbody>
                 </table>
-                <HeadChoosingBox gameId={gameId} />
+                {/* <HeadChoosingBox gameId={gameId} /> */}
               </div>
             ) : (
               ""

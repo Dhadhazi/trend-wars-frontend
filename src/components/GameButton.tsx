@@ -108,6 +108,7 @@ export const GameButton = ({ pair, onclick, state }: Props) => {
       winner={pair.winner}
       scaleTo={state === BUTTON_STATES.CHOOSE ? 1.0 : pair.winner ? 1.1 : 0.9}
       onClick={() => onclick(pair)}
+      disabled={state === BUTTON_STATES.RESULT}
     >
       {pair.word}
     </GButton>

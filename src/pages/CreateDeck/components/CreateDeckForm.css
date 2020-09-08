@@ -55,7 +55,7 @@ input[type="checkbox"] {
     "countryselect countryselect"
     "submitbutton submitbutton";
   grid-template-columns: 350px 350px;
-  grid-template-rows: 50px 80px 110px 60px 100px 0fr 75px 1fr 1fr;
+  grid-template-rows: 50px 80px 110px 60px 100px 0fr 75px;
   gap: 15px 5px;
   font-size: 24px;
 }

@@ -48,7 +48,6 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   const [gameState, setGameState] = useState<number>(gameRoom.state);
   const [players, setPlayers] = useState<[MultiPlayer]>(gameRoom.players);
   const [answered, setAnswered] = useState<boolean>(false);
-  const [localHead, setLocalHead] = useState<number>(1);
 
   const [changeGameStateMutation] = useMutation(CHANGE_GAMESTATE, {
     onError: (error: any) => console.log("error", error?.networkError?.result),
