@@ -11,7 +11,7 @@ const rotation = Math.floor(Math.random() * 360);
 const flyingAnimation = keyframes`
 0% {
   opacity: 0;
-  transform: rotate(0deg);
+  transform: rotate(0deg) translateY(-100px) translateX(0px);
 }
 
 20% {
@@ -23,7 +23,7 @@ const flyingAnimation = keyframes`
 }
 
 100% {
-  transform: translateX(${direction}px) translateY(-200px) rotate(${rotation}deg);
+  transform: translateX(${direction}px) translateY(-400px) rotate(${rotation}deg);
   opacity: 0;
 }
 `;

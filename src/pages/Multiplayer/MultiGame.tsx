@@ -39,7 +39,6 @@ const GAMEROOM_SUB = gql`
       }
       answers
       state
-      heads
     }
   }
 `;

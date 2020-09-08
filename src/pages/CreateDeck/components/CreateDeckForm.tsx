@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import "./CreateDeckForm.css";
+
 import { CountryCodes } from "../../../constants/CountryCodes";
 import { CategoryList } from "../../../constants/CategoryList";
-import "./CreateDeckForm.css";
 import { BButton } from "../../../components/BButton";
 
 type DeckForm = {
@@ -32,13 +34,13 @@ type Props = {
 export const CreateDeckForm = ({ SubmitDeck }: Props) => {
   const [keywordInput, setKeywordInput] = useState<string>("");
   const [keywordList, setkeywordList] = useState<string[]>([]);
-
   const [allCountries, setAllCountries] = useState<boolean>(false);
+
+  const todayDate = new Date().toISOString().slice(0, 10);
 
   const { register, handleSubmit, watch } = useForm<DeckForm>({
     mode: "onBlur",
   });
-  const todayDate = new Date().toISOString().slice(0, 10);
 
   const onSubmit = handleSubmit((data: DeckForm) => {
     if (data.geo.includes("all")) data.geo = [];
@@ -88,7 +90,10 @@ export const CreateDeckForm = ({ SubmitDeck }: Props) => {
             id="description"
             name="description"
             placeholder="Minimum 15 characters"
-            ref={register({ required: true, minLength: 15 })}
+            ref={register({
+              required: true,
+              minLength: 15,
+            })}
           />
         </div>
         <div id="sourceheader-grid">

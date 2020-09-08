@@ -3,6 +3,8 @@ import { CountdownTimer } from "./CountdownTimer";
 import { GameButton, BUTTON_STATES } from "./GameButton";
 import "./GamePlay.css";
 import Fade from "../animations/Fade";
+import { HeadSender } from "../pages/Multiplayer/components/HeadSender";
+import { HeadChoosingBox } from "../pages/Multiplayer/components/HeadChoosingBox";
 
 type Props = {
   gameState: number;
@@ -21,7 +23,7 @@ export const GamePlay = ({
   buttonState,
   playerChoice,
   players,
-  gameId,
+  gameId = "",
 }: Props) => {
   const numberOfQuestions = deck.pairs.length;
   return (
@@ -57,6 +59,7 @@ export const GamePlay = ({
               onclick={playerChoice}
               state={buttonState}
             />
+            {players ? <HeadSender gameId={gameId} /> : ""}
             <GameButton
               pair={deck.pairs[gameState][1]}
               onclick={playerChoice}
@@ -89,7 +92,7 @@ export const GamePlay = ({
                       })}
                   </tbody>
                 </table>
-                {/* <HeadChoosingBox gameId={gameId} /> */}
+                <HeadChoosingBox gameId={gameId} />
               </div>
             ) : (
               ""

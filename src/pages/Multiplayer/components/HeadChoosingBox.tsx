@@ -54,6 +54,7 @@ export const HeadChoosingBox = ({ gameId = "" }: Props) => {
 
   function headPushed(headNumber: number) {
     setPushed(true);
+
     sendHeadMutation({
       variables: {
         gameId: gameId,
@@ -61,6 +62,7 @@ export const HeadChoosingBox = ({ gameId = "" }: Props) => {
       },
     });
     setTimeout(() => setPushed(false), 2000);
+    // dispatch(newHead(headNumber));
   }
 
   return (
