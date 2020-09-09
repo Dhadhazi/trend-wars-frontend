@@ -148,7 +148,7 @@ export const CreateDeckForm = ({ SubmitDeck }: Props) => {
         </div>
         <div id="addkeyword-grid">
           {" "}
-          <label htmlFor="keywordsForm">Add a keyword</label>{" "}
+          <label htmlFor="keywordsForm">Add a trend word</label>{" "}
           <div id="keyword-input-div">
             <input
               type="text"
@@ -163,7 +163,8 @@ export const CreateDeckForm = ({ SubmitDeck }: Props) => {
             </button>
           </div>
           <div className="detail-information">
-            Must add at least 4 keywords.
+            Must add at least 4 words. These will be the ones we generate the
+            questions from.
           </div>
         </div>
         <div id="keywords-grid">
