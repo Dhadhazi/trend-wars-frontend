@@ -8,11 +8,11 @@ Trend Wars is a game where you as a player can choose which word was trendiest i
 <table>
 <tr>
   <td rowspan="4"><img src="https://github.com/Dhadhazi/trend-wars-frontend/blob/master/public/images/help.png"></td>
-  <td><a href="#wireframes">Wireframes</a></td>
+  <td><a href=#wireframes>Wireframes</a></td>
   
 </tr>
 <tr>
-  <td>Design</td>
+  <td>[Design](#design)</td>
 </tr>
   <tr>
   <td>Game Flow Chart</td>
