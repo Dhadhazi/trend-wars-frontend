@@ -153,7 +153,6 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     );
   }
 
-  //TODO: Make a good game has been cancelled page
   if (gameState === -2) {
     return (
       <div className="flexbox-parent-middle-top">
