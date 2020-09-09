@@ -1,0 +1,17 @@
+#waitingroom-roomid {
+  font-size: 36px;
+  font-weight: 400;
+}
+
+#waitingroom-playerlist-title {
+  font-size: 28px;
+}
+
+#waitingroom-playerlist {
+  list-style-type: decimal;
+  font-size: 25px;
+}
+
+#waitingroom-startbutton {
+  font-size: 20px;
+}

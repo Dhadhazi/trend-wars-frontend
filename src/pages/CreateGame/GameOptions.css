@@ -1,0 +1,102 @@
+h2 {
+  font-size: 40px;
+  font-weight: 500;
+  text-align: center;
+}
+
+h5 {
+  display: inline;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.slider-label {
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.deck-selector-slider {
+  width: 90%;
+  height: 10px;
+  background-color: #2980b9;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.deck-selector-slider:hover {
+  opacity: 1;
+}
+
+#deck-select-info {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+}
+
+#gametype-select-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#slider-div {
+  text-align: center;
+}
+
+#start-game-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+#nickname-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+#nickname-input {
+  height: 50px;
+  width: 300px;
+}
+
+@media (max-width: 650px) {
+  h2 {
+    font-size: 30px;
+  }
+
+  h5 {
+    font-size: 24px;
+  }
+
+  #deck-select-info {
+    font-size: 16px;
+  }
+
+  #gametype-select-box {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #nickname-box {
+    font-size: 16px;
+  }
+
+  #nickname-input {
+    height: 30px;
+    width: 200px;
+  }
+
+  .slider-label {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+}

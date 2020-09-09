@@ -1,0 +1,261 @@
+textarea {
+  background-color: #c4c4c4;
+  border: none;
+  padding: 5px;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+}
+
+.detail-information {
+  font-size: 16px;
+  text-align: center;
+}
+
+.country-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 150px;
+  font-size: 16px;
+}
+
+.keyword-list-element {
+  border: 1px solid black;
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 0px 5px;
+  margin: 3px;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0.8;
+}
+
+.keyword-list-element:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+#createdeck-grid {
+  display: grid;
+  grid-template-areas:
+    "name nameinput"
+    "desc descinput"
+    "sourceheader sourceheader"
+    "category categoryselect"
+    "startdate enddate"
+    "addkeyword keywords"
+    "countryheader countryheader"
+    "countryselect countryselect"
+    "submitbutton submitbutton";
+  grid-template-columns: 350px 350px;
+  grid-template-rows: 50px 80px 110px 60px 100px 0fr 75px;
+  gap: 15px 5px;
+  font-size: 24px;
+}
+
+#name-grid {
+  grid-area: name;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#name {
+  width: 200px;
+}
+
+#nameinput-grid {
+  grid-area: nameinput;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#desc-grid {
+  grid-area: desc;
+  text-align: right;
+}
+
+#descinput-grid {
+  grid-area: descinput;
+}
+
+#description {
+  width: 300px;
+  height: 60px;
+  font-size: 16px;
+}
+
+#sourceheader-grid {
+  grid-area: sourceheader;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#category-grid {
+  grid-area: category;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#categoryselect-grid {
+  grid-area: categoryselect;
+}
+
+#startdate-grid {
+  grid-area: startdate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+#enddate-grid {
+  grid-area: enddate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+#addkeyword-grid {
+  grid-area: addkeyword;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#keyword-input-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#keywordsForm:hover,
+#keywordsForm:active,
+#keywordsForm:focus {
+  transform: scale(1);
+}
+
+#keyword-add-btn {
+  height: 37px;
+  width: 40px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  background-color: #2980b9;
+}
+
+#keywords-grid {
+  grid-area: keywords;
+}
+
+#keywords-list-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#countryheader-grid {
+  grid-area: countryheader;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+#countryselect-grid {
+  grid-area: countryselect;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#allcountries-label {
+  font-weight: 500;
+}
+#submitbutton-grid {
+  grid-area: submitbutton;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  #createdeck-grid {
+    grid-template-areas:
+      "name"
+      "nameinput"
+      "desc"
+      "descinput"
+      "sourceheader"
+      "category"
+      "categoryselect"
+      "startdate"
+      "enddate"
+      "addkeyword"
+      "keywords"
+      "countryheader "
+      "countryselect "
+      "submitbutton ";
+    grid-template-columns: 1fr;
+    grid-template-rows: 30px 45px 30px 60px 90px 30px 60px 90px 90px 90px;
+    gap: 10px 5px;
+    font-size: 18px;
+  }
+
+  .detail-information {
+    font-size: 12px;
+  }
+
+  #name-grid {
+    justify-content: center;
+    width: 100%;
+  }
+
+  #nameinput-grid {
+    justify-content: center;
+  }
+
+  #desc-grid {
+    display: flex;
+    justify-content: center;
+  }
+
+  #descinput-grid {
+    display: flex;
+    justify-content: center;
+  }
+
+  #description {
+    width: 300px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  #sourceheader-grid {
+    grid-area: sourceheader;
+    text-align: center;
+    display: inline;
+  }
+
+  #category-grid {
+    justify-content: center;
+  }
+  #categoryselect-grid {
+    display: flex;
+    justify-content: center;
+  }
+}

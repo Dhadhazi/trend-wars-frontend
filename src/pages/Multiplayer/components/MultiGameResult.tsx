@@ -1,4 +1,6 @@
 import React from "react";
+import { BButton } from "../../../components/BButton";
+import "./MutliGameResult.css";
 
 type Props = {
   gameRoom: GameRoomType;
@@ -8,27 +10,41 @@ type Props = {
 
 export const MultiGameResult = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   return (
-    <div className="container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {gameRoom.players
-            .sort((a, b) => b.points - a.points)
-            .map((player: MultiPlayer, i: number) => (
-              <tr key={`ranking-${i}`}>
-                <th scope="row">{i + 1}</th>
-                <td>{player.nick}</td>
-                <td>{player.points}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+    <div className="flexbox-parent-middle-top flex-direction-column">
+      <div id="results-title">
+        Congratulations, you got X right from
+        {gameRoom.gameDeck.pairs.length} questions right!
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gameRoom.players
+              .sort((a, b) => b.points - a.points)
+              .map((p: MultiPlayer, i: number) => {
+                return (
+                  <tr key={`scoreboard-${i}`}>
+                    <td>{p.nick}</td>
+                    <td>{p.points}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+      <div id="results-deckname">{gameRoom.gameDeck.name}</div>
+      <div id="results-info">
+        Date: {gameRoom.gameDeck.dateString}
+        <br />
+        Territory: {gameRoom.gameDeck.geo}
+      </div>
+
+      <BButton text="New Game" onClick={() => gameDirectorCB(true)} />
     </div>
   );
 };

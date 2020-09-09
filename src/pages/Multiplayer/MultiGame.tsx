@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { gql, useSubscription, useMutation } from "@apollo/client";
-import { GameButton, BUTTON_STATES } from "../../components/GameButton";
-import { CountdownTimer } from "../../components/CountdownTimer";
+import { BUTTON_STATES } from "../../components/GameButton";
 import { MultiWaitingRoom } from "./components/MultiWaitingRoom";
 import { MultiGameResult } from "./components/MultiGameResult";
+import { GamePlay } from "../../components/GamePlay";
+import Fade from "../../animations/Fade";
 
 type Props = {
   gameRoom: GameRoomType;
@@ -62,8 +64,6 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     errorPolicy: "all",
   });
 
-  const numberOfQuestions = gameRoom.gameDeck.pairs.length;
-
   useSubscription(GAMEROOM_SUB, {
     variables: { gameId: gameRoom.gameId },
     onSubscriptionData: ({ subscriptionData }) => {
@@ -73,9 +73,11 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
       ) {
         if (gameRoom.creator === nick) setTimeout(() => nextState(), 1500);
       }
+
       if (subscriptionData.data.GameRoom.state === -2) {
         setGameState(subscriptionData.data.GameRoom.state);
       }
+
       if (gameState + 1 === subscriptionData.data.GameRoom.state) {
         setAnswered(false);
         setGameState(subscriptionData.data.GameRoom.state);
@@ -107,9 +109,7 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     };
   }, [exitGameMutation, gameRoom.gameId, nick]);
 
-  //TODO: Investigate why is it called twice
   function nextState() {
-    console.log("next state called");
     changeGameStateMutation({
       variables: {
         gameId: gameRoom.gameId,
@@ -142,20 +142,24 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
 
   if (gameState === -1) {
     return (
-      <MultiWaitingRoom
-        gameId={gameRoom.gameId}
-        players={players}
-        creator={nick === gameRoom.creator}
-        gameDirectorCB={nextState}
-      />
+      <Fade>
+        <MultiWaitingRoom
+          gameId={gameRoom.gameId}
+          players={players}
+          creator={nick === gameRoom.creator}
+          gameDirectorCB={nextState}
+        />
+      </Fade>
     );
   }
 
+  //TODO: Make a good game has been cancelled page
   if (gameState === -2) {
     return (
-      <div className="container">
-        {" "}
-        The game has been cancelled by the creator.
+      <div className="flexbox-parent-middle-top">
+        <Link to="/">
+          <img src="./images/gamecancelled.jpg" alt="The game is cancelled" />
+        </Link>
       </div>
     );
   }
@@ -166,82 +170,19 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
       <MultiGameResult
         gameRoom={gameRoom}
         nick={nick}
-        gameDirectorCB={() => {}}
+        gameDirectorCB={gameDirectorCB}
       />
     );
   }
   return (
-    <div className="container  text-center">
-      <div className="row  gamebox">
-        <div className="col-6 text-left">
-          <small>
-            Total questions: {gameState + 1}/{numberOfQuestions}
-            <br />
-            {gameRoom.gameDeck.geo}
-            <br />
-            {gameRoom.gameDeck.dateString}
-          </small>
-        </div>
-        <div className="col-6">
-          <div className="d-flex justify-content-end">
-            <CountdownTimer
-              seconds={gameRoom.gameDeck.timer}
-              trigger={gameState}
-              playing={!answered}
-              completeCB={timerDone}
-            />
-          </div>
-        </div>
-        <div className="col-12">
-          {answered ? "Waiting for others to answer" : ""}
-        </div>
-        <div className="col-md-6 choosebox">
-          <GameButton
-            pair={gameRoom.gameDeck.pairs[gameState][0]}
-            onclick={playerChoice}
-            state={answered ? BUTTON_STATES.RESULT : BUTTON_STATES.CHOOSE}
-          />
-        </div>
-        <div className="col-md-6 choosebox">
-          <GameButton
-            pair={gameRoom.gameDeck.pairs[gameState][1]}
-            onclick={playerChoice}
-            state={answered ? BUTTON_STATES.RESULT : BUTTON_STATES.CHOOSE}
-          />
-        </div>
-
-        <div className="col-12 text-center margin-top">
-          <ul className="list-group">
-            {players.map((p: MultiPlayer, i: number) => (
-              <li
-                key={`pointlis-${i}`}
-                className={
-                  p.nick === nick ? "list-group-item active" : "list-group-item"
-                }
-              >
-                {p.nick}
-                <span className="badge badge-primary badge-pill">
-                  {p.points} points
-                </span>
-              </li>
-            ))}
-          </ul>
-          <small>
-            Pick the answer who was the trendiest in {gameRoom.gameDeck.geo}{" "}
-            {gameRoom.gameDeck.dateString}
-          </small>{" "}
-        </div>
-        <div className="col-12 text-center margin-top">
-          {gameRoom.creator === nick ? (
-            <button className="btn btn-lg btn-game" onClick={() => nextState()}>
-              {" "}
-              Next Question
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-    </div>
+    <GamePlay
+      gameState={gameState}
+      deck={gameRoom.gameDeck}
+      timerDone={timerDone}
+      buttonState={answered ? BUTTON_STATES.RESULT : BUTTON_STATES.CHOOSE}
+      playerChoice={playerChoice}
+      players={players}
+      gameId={gameRoom.gameId}
+    />
   );
 };
