@@ -17,7 +17,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 const wsLink = new WebSocketLink({
-  uri: `ws://trendwars-backend.herokuapp.com/graphql`,
+  uri: `wss://trendwars-backend.herokuapp.com/graphql`,
   options: {
     reconnect: true,
   },
