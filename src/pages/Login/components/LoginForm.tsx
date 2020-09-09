@@ -6,7 +6,6 @@ import { BButton } from "../../../components/BButton";
 type LoginForm = {
   email: string;
   password: string;
-  rememberme: boolean;
 };
 
 type Props = {
@@ -49,15 +48,7 @@ export const LoginForm = ({ onSubmitCB, toRegistration }: Props) => {
               required
             />
           </div>
-          <div id="checkbox-div">
-            <label htmlFor="customCheck1">Remember Me</label>
-            <input
-              type="checkbox"
-              id="checkbox"
-              ref={register()}
-              name="rememberme"
-            />
-          </div>
+
           <BButton text="Sign in" onClick={() => {}} />
         </form>
       </div>

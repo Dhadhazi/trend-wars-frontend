@@ -124,7 +124,6 @@ export const CreateDeckForm = ({ SubmitDeck }: Props) => {
           </select>
         </div>
 
-        {/* TODO: IF i click on enddate first then startdate can be anything because it is truthy. */}
         <div id="startdate-grid">
           <label htmlFor="start_date">Start Date</label>
           <input

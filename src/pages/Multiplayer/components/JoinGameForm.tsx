@@ -22,8 +22,6 @@ export const JoinGameForm = ({
     setGameId(value);
   }
 
-  //TODO: Impemet message box
-
   return (
     <div className="flexbox-parent-middle-top join-game-box">
       <div>

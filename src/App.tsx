@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { GameDirector, GAME_STAGES } from "./components/GameDirector";
-import { TESTER } from "./components/TESTER";
+
 import { Dashboard } from "./pages/Dashboard/dashboard";
 import { TrendWarsLogo } from "./components/TrendWarsLogo";
 import { CreateDeck } from "./pages/CreateDeck/CreateDeck";
@@ -15,8 +15,8 @@ function App() {
         <TrendWarsLogo />
         <MessageBox />
       </div>
-      <Route exact path="/" component={Dashboard} />
 
+      <Route exact path="/" component={Dashboard} />
       <Route path="/createquestions" component={CreateDeck} />
       <Route
         path="/newgame"
@@ -28,7 +28,6 @@ function App() {
           <GameDirector initialState={GAME_STAGES.MULTI_JOIN_GAME} />
         )}
       />
-      <TESTER />
       <Route path="/admin" component={Admin} />
     </div>
   );
