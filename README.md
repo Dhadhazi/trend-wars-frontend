@@ -25,6 +25,8 @@ Trend Wars is a game where you as a player can choose which word was trendiest i
 
 ### Wireframes
 The wireframes not represent the final product and not all pages have wireframes. After finishing the initial coding I switched out Bootstrap and strated using my own design and did not made any new wireframes.
+[Wireframe for dashboard](.github/dashboard.png)
+
 
 
 ### Design
