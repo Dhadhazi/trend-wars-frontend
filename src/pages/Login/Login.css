@@ -1,0 +1,58 @@
+#form {
+  width: 300px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#title {
+  font-size: 40px;
+  font-weight: 400;
+}
+
+label {
+  font-size: 24;
+  font-weight: 300;
+  margin: 10px;
+}
+
+input {
+  width: 250px;
+  background-color: #c4c4c4;
+  border: none;
+  height: 35px;
+  text-align: center;
+  font-size: 24px;
+}
+
+input:hover {
+  outline: none;
+  transform: scale(1.05);
+}
+
+input:active,
+:focus {
+  outline: none;
+}
+
+#checkbox-div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#checkbox {
+  width: 20px;
+}
+
+#register-div {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

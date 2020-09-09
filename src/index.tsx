@@ -13,16 +13,18 @@ import {
 } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: `wss://trendwars-backend.herokuapp.com/graphql`,
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/",
+  uri: "https://trendwars-backend.herokuapp.com/",
 });
 
 const splitLink = split(
@@ -48,7 +50,9 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
       <React.StrictMode>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </React.StrictMode>
     </BrowserRouter>
   </ApolloProvider>,

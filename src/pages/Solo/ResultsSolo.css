@@ -1,0 +1,38 @@
+#results-title {
+  font-size: 40px;
+  margin: 20px;
+  text-align: center;
+}
+
+#results-deckname {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+#results-info {
+  font-weight: 200;
+}
+
+#results-solo-buttons {
+  display: flex;
+  width: 60vh;
+  margin-top: 20px;
+  justify-content: space-around;
+}
+
+@media (max-width: 670px) {
+  #results-title {
+    font-size: 28px;
+    margin: 10px;
+  }
+  #results-deckname {
+    font-size: 20px;
+  }
+
+  #results-solo-buttons {
+    display: flex;
+    width: 50vh;
+    margin-top: 20px;
+    flex-direction: column;
+  }
+}

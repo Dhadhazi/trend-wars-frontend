@@ -18,9 +18,8 @@ export const SelectCategories = ({
   setCategory,
 }: Props) => {
   return (
-    <div className="col-md-6">
+    <div>
       <select
-        className="form-control form-control-lg"
         name="category"
         id="category"
         value={selectedCategory}
@@ -28,6 +27,7 @@ export const SelectCategories = ({
           setCategory(Number(ev.target.value))
         }
       >
+        <option value={0}>All Categories</option>
         {CategoryList.filter((d: CategoryType) =>
           deckCategories.includes(d.number)
         ).map((category: CategoryType, i: number) => (

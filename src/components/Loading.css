@@ -1,0 +1,19 @@
+#circle-container {
+  position: relative;
+  width: 30vw;
+  height: 30vw;
+  box-sizing: border-box;
+}
+
+#circle {
+  display: block;
+  width: 30vw;
+  height: 30vw;
+  border: 5vw solid #e9e9e9;
+  border-top: 5vw solid #3498db;
+  border-radius: 50%;
+  position: absolute;
+  box-sizing: border-box;
+  top: 15;
+  left: 0;
+}
