@@ -15,13 +15,13 @@ Trend Wars is a game where you as a player can choose which word was trendiest i
   <td><a href=#design>Design</a></td>
 </tr>
   <tr>
-  <td><a href=#wireframes>Wireframes</a></td>
+  <td><a href=#game-flow-chart>Game Flow Chart</a></td>
 </tr>
   <tr>
-  <td><a href=#wireframes>Wireframes</a></td>
+  <td><a href=#code-documentation>Code Documentation</a></td>
 </tr>
   <tr>
-  <td><a href=#Technologies>Technologies</a></td>
+  <td><a href=#technologies>Technologies</a></td>
 </tr>
 </table>
 
