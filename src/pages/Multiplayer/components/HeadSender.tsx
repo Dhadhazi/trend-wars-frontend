@@ -32,7 +32,6 @@ export const HeadSender = ({ gameId }: Props) => {
   useSubscription(HEADSPACE_SUP, {
     variables: { gameId: gameId },
     onSubscriptionData: ({ subscriptionData }) => {
-      console.log("Head sender", subscriptionData.data.HeadSpace.heads);
       setHeadList(subscriptionData.data.HeadSpace.heads);
     },
   });

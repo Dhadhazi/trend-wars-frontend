@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { gql, useSubscription, useMutation } from "@apollo/client";
 import { BUTTON_STATES } from "../../components/GameButton";
 import { MultiWaitingRoom } from "./components/MultiWaitingRoom";
@@ -108,7 +109,6 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
     };
   }, [exitGameMutation, gameRoom.gameId, nick]);
 
-  //TODO: Investigate why is it called twice
   function nextState() {
     changeGameStateMutation({
       variables: {
@@ -156,9 +156,10 @@ export const MultiGame = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   //TODO: Make a good game has been cancelled page
   if (gameState === -2) {
     return (
-      <div className="flexbox-parent-middle-middle">
-        {" "}
-        The game has been cancelled by the creator.
+      <div className="flexbox-parent-middle-top">
+        <Link to="/">
+          <img src="./images/gamecancelled.jpg" alt="The game is cancelled" />
+        </Link>
       </div>
     );
   }
