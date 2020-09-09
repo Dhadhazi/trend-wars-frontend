@@ -17,14 +17,14 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: `ws://trendwars-backend.herokuapp.com/graphql`,
   options: {
     reconnect: true,
   },
 });
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/",
+  uri: "https://trendwars-backend.herokuapp.com/",
 });
 
 const splitLink = split(
