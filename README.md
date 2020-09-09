@@ -42,6 +42,8 @@ I designed the whole app - no wonder I'm not a designer - and implemented it wit
 ---
 
 ### Game Flow Chart
+The game directed by the game director. It decides what component to mount/unmount. Sub directors are the sologame and multigame which can direct most of their own part of the gameplay. 
+![Game Flow Chart](.github/gameflowchart.png "Game Flow Chart")
 
 ### Code Documentation
 SRC folder content one-by-one 
