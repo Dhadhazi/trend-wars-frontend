@@ -12,7 +12,8 @@ export const MultiGameResult = ({ gameRoom, nick, gameDirectorCB }: Props) => {
   return (
     <div className="flexbox-parent-middle-top flex-direction-column">
       <div id="results-title">
-        Congratulations, you got X right from
+        Congratulations, you got{" "}
+        {gameRoom.players.find((p) => p.nick === nick)?.points} right from
         {gameRoom.gameDeck.pairs.length} questions right!
       </div>
       <div>
