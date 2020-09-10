@@ -99,9 +99,18 @@ Contains the separate pages of the application.
 
 
 ## Technologies
+### Front-end
 - React Typescript for framework
 - Apollo Client / GraphQL to connect the backend
 - Moment to convert the dates
 - Redux for messaging and user handling
 - Framer-motion for some animations
 - Styled-components
+
+### Back-end
+- Apollo Server / GraphQL 
+- Mongoose to connect to MongoDB
+- Bcrypt to encrypt passwords
+- JSON Web Token to secure them in the user
+- Lodash just for merging resolvers
+- Unofficial Google Trends Api to grab data from it
